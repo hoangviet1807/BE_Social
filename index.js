@@ -9,7 +9,7 @@ import user from "./routers/user.js";
 import mongoose from "mongoose";
 
 const app = express();
-const PORT = process.env.port || 3002;
+const PORT = process.env.port || 8000;
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -26,7 +26,7 @@ const uri =
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
     methods: ["GET", "POST"],
   },
 });
@@ -52,11 +52,11 @@ io.on("connection", (socket) => {
   });
 });
 
-app.use("/login", (req, res) => {
-  res.send({
-    token: "test123",
-  });
-});
+// app.use("/login", (req, res) => {
+//   res.send({
+//     token: "test123",
+//   });
+// });
 
 app.use("/message", message);
 
@@ -73,8 +73,8 @@ mongoose
   })
   .then(() => {
     console.log("Connected to DB");
-    app.listen(5000, () => {
-      console.log("listening on port " + 5000);
+    app.listen(8080, () => {
+      console.log("listening on port " + 8080);
     });
   })
   .catch((err) => {
