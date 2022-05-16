@@ -6,6 +6,7 @@ import { Server } from "socket.io";
 import { MessageModel } from "./models/messageModal.js";
 import message from "./routers/message.js";
 import user from "./routers/user.js";
+import room from "./routers/room.js"
 import mongoose from "mongoose";
 
 const app = express();
@@ -26,7 +27,7 @@ const uri =
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
@@ -61,6 +62,8 @@ io.on("connection", (socket) => {
 app.use("/message", message);
 
 app.use("/user", user);
+
+app.use("/room", room)
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

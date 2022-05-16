@@ -10,9 +10,10 @@ export const createUser = async (req, res) => {
       res.status(400).json({ "message": "Username already exist" });
     }
     else {
+      let user = new UserModel(newUser)
+      user.save()
       res.status(200).json({ "message": "Create account successfully" })
     }
-    res.status(200).json({ user });
   } catch (error) {
     res.status(500).json({
       error: error,
@@ -39,10 +40,7 @@ export const login = async (req, res) => {
       password: account.password,
     });
     if (user) {
-      res.status(200).json(user)
-      // res.send({
-      //   token: account.username,
-      // })
+      res.status(200).json("login successfully")
     }
   }
   catch (error) {
