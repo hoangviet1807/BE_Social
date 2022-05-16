@@ -6,19 +6,20 @@ const roomModel = new Schema(
     roomName: {
       type: String,
     },
-    members:{
-        type: Array
+    members: {
+      type: Array,
+      default: []
     },
     messages: {
       type: [{
         message: {
-            type: String,
-          },
+          type: String,
+        },
         sender: {
-            type: String,
-          },
+          type: String,
+        },
         timestamps: {
-            type: String
+          type: String
         }
       }],
       default: []

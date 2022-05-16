@@ -35,12 +35,15 @@ export const getUsers = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const account = req.body;
-    const user = await UserModel.find({
+    const user = await UserModel.findOne({
       username: account.username,
       password: account.password,
     });
     if (user) {
       res.status(200).json("login successfully")
+    }
+    else {
+      res.status(400).json({ "message": "username or password incorrect" })
     }
   }
   catch (error) {
