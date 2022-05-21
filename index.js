@@ -3,7 +3,6 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import http from "http";
 import { Server } from "socket.io";
-import { MessageModel } from "./models/messageModal.js";
 import message from "./routers/message.js";
 import user from "./routers/user.js";
 import room from "./routers/room.js"
@@ -48,6 +47,8 @@ io.on("connection", (socket) => {
     console.log("User Disconnected", socket.id);
   });
 });
+
+
 
 // app.use("/login", (req, res) => {
 //   res.send({

@@ -35,20 +35,46 @@ export const getRoomUser = async (req, res) => {
 export const updateMessage = async (req, res) => {
   try {
     const data = req.body
-    const id = req.params.id
+    let message = {}
+
+    if (data.image) {
+      message = {
+        "sender": data.sender,
+        "timestamps": data.timestamps,
+        "image": {
+          data: fs.readFileSync(path.join(__dirname + '/uploads/' + data.image)),
+          contentType: 'image/png'
+        }
+      };
+
+    }
+    else {
+      message = {
+        "sender": data.sender,
+        "message": data.message,
+        "timestamps": data.timestamps
+      };
+    }
+
+    //   const img = {
+    //   data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+    //   contentType: 'image/png'
+    // }
     // const message = {
     //   "sender": data.sender,
     //   "message": data.message,
     //   "timestamps": data.timestamps
     // };
-    await RoomModel.findOneAndUpdate(
-      { _id: id },
-      {
-        $push: {
-          messages: data
-        }
-      })
-    res.status(200).json({ "Message": "Updated" })
+    // await RoomModel.findOneAndUpdate(
+    //   { _id: id },
+    //   {
+    //     $push: {
+    //       messages: message,
+    //     }
+    //   })
+
+    console.log(message);
+    res.status(200).json({ "Message": message })
   }
   catch (error) {
     res.status(500).json({

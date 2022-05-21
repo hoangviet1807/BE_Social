@@ -14,12 +14,18 @@ const roomModel = new Schema(
       type: [{
         message: {
           type: String,
+          default: ""
         },
         sender: {
           type: String,
         },
         timestamps: {
           type: String
+        },
+        image: {
+          data: Buffer,
+          contentType: String,
+          default: ""
         }
       }],
       default: []
